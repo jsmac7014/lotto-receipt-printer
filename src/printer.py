@@ -25,6 +25,16 @@ def _apply_style(printer, style: str) -> None:
             width=2,
             height=2,
         )
+    elif style == "medium_center":
+        printer.set(
+            align="center",
+            bold=True,
+            double_height=False,
+            double_width=False,
+            custom_size=True,
+            width=1,
+            height=2,
+        )
     elif style == "normal_center":
         printer.set(
             align="center",
