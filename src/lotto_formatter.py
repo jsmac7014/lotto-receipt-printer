@@ -27,8 +27,18 @@ def _format_line(numbers: List[int], index: int, columns: int) -> List[Line]:
     min_len = len(label) + 1 + sum(len(n) for n in nums) + (len(nums) - 1)
     extra = max(0, columns - min_len)
     gaps = len(nums) - 1
-    # Distribute extra spaces evenly across the gaps.
-    spaces = [1 + extra // gaps + (1 if i < extra % gaps else 0) for i in range(gaps)]
+    # Start with one space between each number, then spread remaining spaces
+    # outward from the center so gaps stay visually balanced.
+    spaces = [1] * gaps
+    left = gaps // 2 - 1
+    right = gaps // 2
+    for _ in range(extra):
+        if right < gaps:
+            spaces[right] += 1
+            right += 1
+        elif left >= 0:
+            spaces[left] += 1
+            left -= 1
 
     parts = [label, " "]
     for i, n in enumerate(nums):
