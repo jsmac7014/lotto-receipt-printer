@@ -16,15 +16,16 @@ def _header(columns: int) -> List[Line]:
     return [
         ("big_center", "Lotto 6/45"),
         ("normal_center", "Lucky Numbers"),
-        ("normal_sep", "=" * columns),
+        ("normal_sep", "-" * columns),
     ]
 
 
 def _format_line(numbers: List[int], index: int, columns: int) -> List[Line]:
-    nums = "  ".join(f"{n:02d}" for n in numbers)
-    return [
-        ("medium_center", f"A{index} {nums}"),
-    ]
+    label = f"A{index}"
+    nums = " ".join(f"{n:02d}" for n in numbers)
+    line = f"{label} {nums}"
+    padding = max(0, columns - len(line))
+    return [("medium_left", line + " " * padding)]
 
 
 
