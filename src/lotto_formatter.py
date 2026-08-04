@@ -38,13 +38,13 @@ def _format_line(numbers: List[int], index: int, columns: int) -> List[Line]:
         parts.append(n)
         if i < gaps:
             parts.append(" " * spaces[i])
-    return [("normal_left", "".join(parts))]
+    return [("medium_left", "".join(parts))]
 
 
 
 def format_lotto_ticket(
     numbers: List[List[int]],
-    columns: int = 40,
+    columns: int = 48,
 ) -> List[Line]:
     lines: List[Line] = _header(columns)
     lines.append(("normal_left", f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}"))
