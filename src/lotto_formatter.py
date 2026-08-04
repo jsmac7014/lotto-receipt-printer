@@ -22,10 +22,20 @@ def _header(columns: int) -> List[Line]:
 
 def _format_line(numbers: List[int], index: int, columns: int) -> List[Line]:
     label = f"A{index}"
-    nums = " ".join(f"{n:02d}" for n in numbers)
-    line = f"{label} {nums}"
-    padding = max(0, columns - len(line))
-    return [("medium_left", line + " " * padding)]
+    nums = [f"{n:02d}" for n in numbers]
+    # Minimum length: label + space + numbers with single spaces between them.
+    min_len = len(label) + 1 + sum(len(n) for n in nums) + (len(nums) - 1)
+    extra = max(0, columns - min_len)
+    gaps = len(nums) - 1
+    # Distribute extra spaces evenly across the gaps.
+    spaces = [1 + extra // gaps + (1 if i < extra % gaps else 0) for i in range(gaps)]
+
+    parts = [label, " "]
+    for i, n in enumerate(nums):
+        parts.append(n)
+        if i < gaps:
+            parts.append(" " * spaces[i])
+    return [("medium_left", "".join(parts))]
 
 
 
@@ -40,7 +50,7 @@ def format_lotto_ticket(
     for i, line in enumerate(numbers, start=1):
         lines.extend(_format_line(line, i, columns))
 
-    lines.append(("normal_sep", "=" * columns))
+    lines.append(("normal_sep", "-" * columns))
     lines.append(("small_center", "Good luck!"))
     lines.append(("blank", ""))
     lines.append(("blank", ""))
