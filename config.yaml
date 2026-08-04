@@ -1,0 +1,8 @@
+printer:
+  device: "/dev/usb/lp4"
+  columns: 21
+  cut: true
+
+game:
+  # Number of games (lines) to generate per print
+  lines: 5
