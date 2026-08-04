@@ -1,6 +1,6 @@
 printer:
   device: "/dev/usb/lp4"
-  columns: 21
+  columns: 40
   cut: true
 
 game:
