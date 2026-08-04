@@ -22,7 +22,7 @@ def _apply_style(printer, style: str) -> None:
             double_height=False,
             double_width=False,
             custom_size=True,
-            width=1,
+            width=2,
             height=2,
         )
     elif style == "normal_center":
