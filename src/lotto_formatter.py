@@ -21,10 +21,9 @@ def _header(columns: int) -> List[Line]:
 
 
 def _format_line(numbers: List[int], index: int, columns: int) -> List[Line]:
-    nums = " ".join(f"{n:02d}" for n in numbers)
+    nums = "  ".join(f"{n:02d}" for n in numbers)
     return [
-        ("normal_left", f"A{index}"),
-        ("medium_center", nums),
+        ("medium_center", f"A{index} {nums}"),
     ]
 
 
